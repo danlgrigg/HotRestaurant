@@ -6,7 +6,7 @@ var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT|| 3000;
+var PORT = process.env.PORT || 3001;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -14,40 +14,57 @@ app.use(express.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
-var table = [
-    {
-        cutomerName: "Dandrew",
-        phoneNumber: "205-555-5555",
-        customerEmail: "blah@blah.com",
-        customerID: "dandrew85"
-    },
-]
+var tables = [
+  {
+    cutomerName: "Dandrew",
+    phoneNumber: "205-555-5555",
+    customerEmail: "blah@blah.com",
+    customerID: "dandrew85"
+  }
+];
+
+var waitlist = [];
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
-  });
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 app.get("/tables", function(req, res) {
-    res.sendFile(path.join(__dirname, "tables.html"));
-  });
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
 app.get("/reserve", function(req, res) {
-    res.sendFile(path.join(__dirname, "reserve.html"));
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+// Displays reservation, or returns false
+app.get("/JSONtables", function(req, res) {
+  return res.json(tables);
+});
+
+// Create New tables - takes in JSON input
+app.post("/api/tables", function(req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    var newTable = req.body;
+    if(tables.length>5){
+        console.log(newTable);
+        
+        waitlist.push(newTable);
+        res.json(newTable);
+    }else{
+    console.log(newTable);
+    tables.push(newTable);
+    res.json(newTable);
+    }
+    
   });
-
-// #name
-// #phone
-// #email
-// #userID
-
-// Displays a single reservation, or returns false
-// app.get("/api/reservation/:reservation", function(req, res) {
-//     var chosen = req.params.reserve;
   
-//     console.log(chosen);
-// });
+
+
+  
 
 //Starts the server to begin listening
 // =============================================================
