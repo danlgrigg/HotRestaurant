@@ -14,6 +14,7 @@ app.use(express.json());
 
 // Star Wars Characters (DATA)
 // =============================================================
+var waitlist = [];
 var tables = [
   {
     cutomerName: "Dandrew",
@@ -22,8 +23,6 @@ var tables = [
     customerID: "dandrew85"
   }
 ];
-
-var waitlist = [];
 
 // Routes
 // =============================================================
@@ -40,31 +39,28 @@ app.get("/reserve", function(req, res) {
 });
 
 // Displays reservation, or returns false
-app.get("/JSONtables", function(req, res) {
+app.get("/api/tables", function(req, res) {
   return res.json(tables);
+});
+app.get("/api/waitlist", function(req, res) {
+  return res.json(waitlist);
 });
 
 // Create New tables - takes in JSON input
 app.post("/api/tables", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newTable = req.body;
-    if(tables.length>5){
-        console.log(newTable);
-        
-        waitlist.push(newTable);
-        res.json(newTable);
-    }else{
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  var newTable = req.body;
+  if (tables.length > 5) {
+    console.log(newTable);
+    waitlist.push(newTable);
+    res.json(newTable);
+  } else {
     console.log(newTable);
     tables.push(newTable);
     res.json(newTable);
-    }
-    
-  });
-  
-
-
-  
+  }
+});
 
 //Starts the server to begin listening
 // =============================================================
