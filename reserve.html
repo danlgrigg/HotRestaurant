@@ -6,11 +6,19 @@
     <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel = "stylesheet"
-          type = "text/css"
-          href = "style.css" />
+    <!--<link rel = "stylesheet"
+     type = "text/css"
+     href = "style.css" /> -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <style>
+        body{
+            background: black;
+            font-family: 'Big Shoulders Display', cursive;
+            color: black;
+        }
+    </style>
 
 </head>
 
@@ -92,10 +100,10 @@
 
     // Here we grab the form elements
     var newReservation = {
-      customerName: $("#reserve-name").val().trim(),
-      phoneNumber: $("#reserve-phone").val().trim(),
-      customerEmail: $("#reserve-email").val().trim(),
-      customerID: $("#reserve-unique-id").val().trim()
+      customerName: $("#name").val().trim(),
+      phoneNumber: $("#phone").val().trim(),
+      customerEmail: $("#email").val().trim(),
+      customerID: $("#userID").val().trim()
     };
 
     console.log(newReservation);
@@ -119,10 +127,10 @@
         }
 
         // Clear the form when submitting
-        $("#reserve-name").val("");
-        $("#reserve-phone").val("");
-        $("#reserve-email").val("");
-        $("#reserve-unique-id").val("");
+        $("#name").val("");
+        $("#phone").val("");
+        $("#email").val("");
+        $("#userID").val("");
 
       });
 
